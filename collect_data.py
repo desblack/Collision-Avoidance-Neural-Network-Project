@@ -1,4 +1,4 @@
-# ************** STUDENTS EDIT THIS FILE **************
+
 
 from SteeringBehaviors import Wander
 import SimulationEnvironment as sim
@@ -14,7 +14,7 @@ def collect_training_data(total_actions, outpath="submission.csv"):
     steering_behavior = Wander(action_repeat)
 
     num_params = 7
-    #STUDENTS: network_params will be used to store your training data
+    
     # a single sample will be comprised of: sensor_readings, action, collision
     network_params = [] # Rows of Length7: 5 sensors, 1 action 1 collision
 
@@ -33,15 +33,13 @@ def collect_training_data(total_actions, outpath="submission.csv"):
                 _, collision, _ = sim_env.step(steering_force)
 
             if collision:
-                steering_behavior.reset_action()
-                #STUDENTS NOTE: this statement only EDITS collision of PREVIOUS action
-                #if current action is very new.
+    
                 if action_timestep < action_repeat * .3: #in case prior action caused collision
                     network_params[-1][-1] = collision #share collision result with prior action
                 break
 
 
-        #STUDENTS: Update network_params.
+       
             if sensor_readings is None:
                 # take a single neutral step to read sensors
                 _, _, sensor_readings = sim_env.step((0.0,0.0))
@@ -59,9 +57,7 @@ def collect_training_data(total_actions, outpath="submission.csv"):
             raise ValueError(f"Expected shape({total_actions},7), got {data.shape}.")
 
 
-    #STUDENTS: Save .csv here. Remember rows are individual samples, the first 5
-    #columns are sensor values, the 6th is the action, and the 7th is collision.
-    #Do not title the columns. Your .csv should look like the provided sample.
+ 
             np.savetxt(out_path,data, delimiter=",", fmt= "%.6f")
             print(f"\nSaved {total_actions} samples to {out_path}")
 
