@@ -99,7 +99,7 @@ flowchart TD
 
 ---
 
-## 🏁 Outcome
+## 🌟 Outcome
 
 After experimenting with:
 - Network depth and hidden units
@@ -134,7 +134,6 @@ python train_model.py
 
 Built by Desarael Black – AI/ML Enthusiast & Robotics Developer.
 
-
 ---
 
 ## 👤 Author
@@ -144,3 +143,45 @@ This project was completed as part of **CSE 571: Artificial Intelligence** at **
 **Desarael Black**  
 Technical Consultant & CSV Data Validation Engineer  
 Aspiring AI/ML Specialist | Robotics Enthusiast | Data Strategist
+
+---
+
+
+
+### 🚀 Real-Time Simulation Display in VSCode
+
+To run this project with **real-time graphical output**, follow these steps:
+
+#### 1. Install Dependencies
+```bash
+pip install pygame torch numpy matplotlib scikit-learn
+```
+
+#### 2. Launch VSCode with GUI permissions (Mac/Linux only)
+```bash
+code .
+```
+
+#### 3. Run the Simulation
+```bash
+python collect_data.py
+```
+
+> A `pygame` window will appear showing a robot avoiding obstacles and collecting data.
+
+---
+
+## 🎨 Sample Visualization
+
+Each robot ray is drawn with:
+- 🔴 Red: projected collisions
+- 🔵 Blue: safe directions
+- 🟢 Green: robot agent
+
+---
+
+## 🌐 Contact
+
+**Desarael Black**  
+Technical Architect | CSV Validation | AI Strategist  
+[LinkedIn](https://linkedin.com/in/desarael) | [GitHub](https://github.com/desblack)
