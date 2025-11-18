@@ -1,49 +1,29 @@
-from torch.utils.data import Dataset, DataLoader, random_split
-import pandas as pd
-import torch
-import pickle
+from Data_Loaders import Data_Loaders  # Import the custom data loader class from Data_Loaders.py
+from Networks import Action_Conditioned_FF  # Import the neural network model class from Networks.py
 
-# Custom Dataset to load CSV and apply normalization
-class CustomDataset(Dataset):
-    def __init__(self, csv_file, normalizer_path):
-        # Read CSV into a pandas DataFrame
-        df = pd.read_csv(csv_file)
-        
-        # Drop the target column 'collision' to get features (X)
-        self.X = df.drop(columns='collision').values.astype('float32')
-        
-        # Extract the label column 'collision'
-        self.y = df['collision'].values.astype('float32').reshape(-1, 1)
-        
-        # Load the scaler object from file to normalize features
-        with open(normalizer_path, 'rb') as f:
-            scaler = pickle.load(f)
-        
-        # Normalize the features using the loaded scaler
-        self.X = scaler.transform(self.X)
+import torch  # Import PyTorch library for deep learning operations
+import torch.nn as nn  # Import neural network modules from PyTorch
+import matplotlib.pyplot as plt  # Import the plotting library to visualize training results
 
-    def __len__(self):
-        # Returns total number of samples
-        return len(self.X)
 
-    def __getitem__(self, idx):
-        # Returns a sample as a dictionary with input and label
-        return {
-            'input': torch.tensor(self.X[idx]),
-            'label': torch.tensor(self.y[idx])
-        }
+def train_model(no_epochs):  # Define a function called train_model that takes number of training epochs as input
 
-# Class to handle training and testing DataLoaders
-class Data_Loaders:
-    def __init__(self, batch_size):
-        # Load the full dataset
-        full_dataset = CustomDataset('training_data.csv', 'normalizer.pkl')
-        
-        # Split 80% for training, 20% for testing
-        train_size = int(0.8 * len(full_dataset))
-        test_size = len(full_dataset) - train_size
-        train_set, test_set = random_split(full_dataset, [train_size, test_size])
-        
-        # Create batched and shuffled DataLoaders
-        self.train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
-        self.test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False)
+    batch_size =  # You must assign a value here (like 64 or 128). It controls how many samples the model sees per step.
+    data_loaders = Data_Loaders(batch_size)  # Create a Data_Loaders object to get train/test data
+    model = Action_Conditioned_FF()  # Create an instance of the neural network model
+
+
+    losses = []  # Initialize a list to keep track of the loss values during training
+    min_loss = model.evaluate(model, data_loaders.test_loader, loss_function)  # Evaluate model on test data before training
+    losses.append(min_loss)  # Store the starting loss in the list
+
+
+    for epoch_i in range(no_epochs):  # Loop through each epoch (full pass through training data)
+        model.train()  # Set model to training mode
+        for idx, sample in enumerate(data_loaders.train_loader): # Loop through batches of data from training loader
+            pass  # Placeholder for training logic (forward pass, loss computation, backpropagation, optimizer step)
+
+
+if __name__ == '__main__':  # This block runs if the file is executed directly
+    no_epochs =  # You must assign a value here (like 10 or 20). It tells how long to train.
+    train_model(no_epochs)  # Call the train_model function with the specified number of epochs
