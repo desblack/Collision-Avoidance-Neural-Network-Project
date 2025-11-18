@@ -184,4 +184,4 @@ Each robot ray is drawn with:
 
 **Desarael Black**  
 Technical Architect | CSV Validation | AI Strategist  
-[LinkedIn]((https://www.linkedin.com/in/desarael-black/)) | [GitHub](https://github.com/desblack)
+[LinkedIn](https://www.linkedin.com/in/desarael-black/) | [GitHub](https://github.com/desblack)
